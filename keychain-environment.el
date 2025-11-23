@@ -60,7 +60,7 @@ information retrieved from files created by the keychain script."
   (let* ((ssh (shell-command-to-string "keychain -q --noask --agents ssh --eval"))
          (gpg (shell-command-to-string "keychain -q --noask --agents gpg --eval")))
     (list (and ssh
-               (string-match "SSH_AUTH_SOCK[=\s]\\([^\s;\n]*\\)" ssh)
+               (string-match "SSH_AUTH_SOCK[=\s]\"?\\([^\s;\n\"]*\\)" ssh)
                (setenv       "SSH_AUTH_SOCK" (match-string 1 ssh)))
           (and ssh
                (string-match "SSH_AGENT_PID[=\s]\\([0-9]*\\)?" ssh)
